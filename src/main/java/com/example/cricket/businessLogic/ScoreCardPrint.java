@@ -1,8 +1,6 @@
 package com.example.cricket.businessLogic;
 
-import com.example.cricket.Beans.Match;
 import com.example.cricket.Beans.Player;
-//import com.example.cricket.service.PlayerMatchService;
 import com.example.cricket.service.PlayerService;
 import com.example.cricket.service.ScoreCardService;
 import lombok.*;
@@ -24,7 +22,7 @@ public class ScoreCardPrint {
     private ScoreCardService scoreCardService;
 
 
-    public void displayScore(List<Player> battingPly, List<Player> bowlingPly, int totalRuns, int wickets, int balls, Match match) {
+    public void displayScore(List<Player> battingPly, List<Player> bowlingPly, int totalRuns, int wickets, int balls) {
         System.out.println("\n=== Batting Scorecard ===");
         System.out.printf("%-15s %-10s %-10s%n", "Player", "Runs", "Balls");
 

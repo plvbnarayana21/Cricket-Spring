@@ -132,7 +132,7 @@ public class Inning {
         System.out.println("\nInnings over! Score: " + totalRuns + "/" + wicketsLost);
         System.out.println("Balls Played: " + ballsBowled);
 
-        scoreCardPrint.displayScore(battingTeam, bowlingTeam, totalRuns, wicketsLost, ballsBowled, match);
+        scoreCardPrint.displayScore(battingTeam, bowlingTeam, totalRuns, wicketsLost, ballsBowled);
         scoreCardService.update(battingTeam, bowlingTeam, totalRuns, ballsBowled, wicketsLost, innings, match, iNo);
         return totalRuns;
     }
