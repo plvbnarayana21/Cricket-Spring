@@ -1,9 +1,6 @@
 package com.example.cricket.controller;
 
-
-import com.example.cricket.Beans.Innings;
 import com.example.cricket.dto.InningsDTO;
-import com.example.cricket.dto.PlayerResponseDTO;
 import com.example.cricket.service.InningsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -4,7 +4,6 @@
 
 package com.example.cricket.controller;
 
-import com.example.cricket.Beans.Match;
 import com.example.cricket.dto.MatchResponseDTO;
 import com.example.cricket.service.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
