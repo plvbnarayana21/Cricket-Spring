@@ -4,7 +4,6 @@ import com.example.cricket.Beans.Innings;
 import com.example.cricket.Beans.Match;
 import com.example.cricket.Beans.Over;
 import com.example.cricket.repository.OverRepo;
-import com.example.cricket.repository.OverRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

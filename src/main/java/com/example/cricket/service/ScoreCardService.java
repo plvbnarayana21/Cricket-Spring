@@ -3,7 +3,6 @@ package com.example.cricket.service;
 import com.example.cricket.Beans.*;
 import com.example.cricket.dto.ScoreCardDTO;
 import com.example.cricket.repository.ScoreCardRepo;
-import com.example.cricket.repository.ScoreCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

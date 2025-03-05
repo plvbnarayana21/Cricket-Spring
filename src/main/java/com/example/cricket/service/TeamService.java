@@ -5,9 +5,7 @@ import com.example.cricket.Beans.Team;
 import com.example.cricket.dto.PlayerResponseDTO;
 import com.example.cricket.dto.TeamResponseDTO;
 import com.example.cricket.repository.PlayerRepo;
-import com.example.cricket.repository.PlayerRepository;
 import com.example.cricket.repository.TeamRepo;
-//import com.example.cricket.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

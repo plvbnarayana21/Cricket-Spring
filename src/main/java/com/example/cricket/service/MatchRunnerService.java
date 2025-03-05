@@ -5,7 +5,6 @@ import com.example.cricket.Beans.Match;
 import com.example.cricket.Beans.Team;
 import com.example.cricket.dto.TossResult;
 import com.example.cricket.repository.MatchRepo;
-import com.example.cricket.repository.MatchRepository;
 import lombok.*;
 import org.springframework.stereotype.*;
 
