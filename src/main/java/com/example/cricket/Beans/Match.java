@@ -24,7 +24,10 @@ public class Match {
     private Innings firstInnings;
     private Innings secondInnings;
     private String matchWinner;
-
+    private String tournamentId;
+    private String location;
+//    Pending,inProcess,completed
+    private String status;
     @DBRef(lazy = true)
     private List<Innings> inningsList;
 

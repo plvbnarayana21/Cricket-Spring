@@ -26,4 +26,16 @@ public class Player {
     @DBRef
     @JsonBackReference
     private Team team;
+
+    public Player(Player other) {
+        this.id = null; // New clone should have a new ID
+        this.pname = other.pname;
+        this.type = other.type;
+        this.runsScored = other.runsScored;
+        this.ballsFaced = other.ballsFaced;
+        this.wicketTaken = other.wicketTaken;
+        this.ballsBowled = other.ballsBowled;
+        this.runsConceded = other.runsConceded;
+        this.team = null; // Prevent circular reference
+    }
 }

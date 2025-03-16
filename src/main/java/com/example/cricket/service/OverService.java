@@ -6,20 +6,26 @@ import com.example.cricket.Beans.Over;
 import com.example.cricket.repository.OverRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OverService {
 
-//    @Autowired
-//    private OverRepository overRepository;
-
     @Autowired
     private OverRepo overRepo;
 
-    public void updateOver(String bowlerName, int overRuns, int overWickets,int oNo,int innningsno,Innings innings,Match match) {
-        Over over= Over.builder().runsScored(overRuns).wicketsFallen(overWickets).bowlerName(bowlerName).
-                overNumber(oNo).inningsno(innningsno).innings(innings).match(match).build();
+    @Transactional
+    public synchronized void updateOver(String bowlerName, int overRuns, int overWickets, int oNo, int inningsno, Innings innings, Match match) {
+        Over over = Over.builder()
+                .runsScored(overRuns)
+                .wicketsFallen(overWickets)
+                .bowlerName(bowlerName)
+                .overNumber(oNo)
+                .inningsno(inningsno)
+                .innings(innings)
+                .match(match)
+                .build();
+
         overRepo.save(over);
-//        update(over);
     }
 }

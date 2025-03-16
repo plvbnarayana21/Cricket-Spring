@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Repository
 public class MatchRepo implements MatchRepository {
@@ -24,6 +25,7 @@ public class MatchRepo implements MatchRepository {
     public <S extends Match> S insert(S entity) {
         return matchRepository.insert(entity);
     }
+
 
     @Override
     public <S extends Match> List<S> insert(Iterable<S> entities) {
@@ -134,4 +136,16 @@ public class MatchRepo implements MatchRepository {
     public Page<Match> findAll(Pageable pageable) {
         return matchRepository.findAll(pageable);
     }
+
+    @Override
+    public List<Match> findByTournamentId(String tournamentId) {
+        return matchRepository.findByTournamentId(tournamentId);
+    }
+
+    public List<Match> findPendingByTournamentId(String tId) {
+          return matchRepository.findByTournamentId(tId).stream()
+                .filter(match -> "PENDING".equals(match.getStatus()))
+                .collect(Collectors.toList());
+    }
+
 }

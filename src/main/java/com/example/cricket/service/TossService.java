@@ -12,52 +12,50 @@ import java.util.Random;
 
 @Service
 public class TossService {
-//    @Autowired
-//    private TeamRepository teamRepository;
 
     @Autowired
     private TeamRepo teamRepo;
+
+    // ThreadLocal Random to ensure thread safety
+    private final ThreadLocal<Random> threadLocalRandom = ThreadLocal.withInitial(Random::new);
 
     public TossResult conductToss(Team teamA, Team teamB) {
         if (teamA == null || teamB == null) {
             throw new IllegalArgumentException("Both teams must be valid");
         }
 
-        Random random = new Random();
+        Random random = threadLocalRandom.get();
         Team tossWinner = random.nextBoolean() ? teamA : teamB;
         String choice = random.nextBoolean() ? "bat" : "bowl";
 
         return new TossResult(tossWinner, choice);
     }
 
-public TossResponseDTO conductToss(String teamAName, String teamBName, String tossCaller, String tossCall, String choice) {
-    Optional<Team> teamAOpt = teamRepo.findByName(teamAName);
-    Optional<Team> teamBOpt = teamRepo.findByName(teamBName);
+    public TossResponseDTO conductToss(String teamAName, String teamBName, String tossCaller, String tossCall, String choice) {
+        Optional<Team> teamAOpt = teamRepo.findByName(teamAName);
+        Optional<Team> teamBOpt = teamRepo.findByName(teamBName);
 
-    if (teamAOpt.isEmpty() || teamBOpt.isEmpty()) {
-        throw new RuntimeException("One or both teams do not exist.");
+        if (teamAOpt.isEmpty() || teamBOpt.isEmpty()) {
+            throw new RuntimeException("One or both teams do not exist.");
+        }
+
+        Team teamA = teamAOpt.get();
+        Team teamB = teamBOpt.get();
+
+        if (!tossCaller.equalsIgnoreCase(teamA.getName()) && !tossCaller.equalsIgnoreCase(teamB.getName())) {
+            throw new RuntimeException("Invalid toss caller.");
+        }
+        if (!tossCall.equalsIgnoreCase("heads") && !tossCall.equalsIgnoreCase("tails")) {
+            throw new RuntimeException("Invalid toss call. Choose 'heads' or 'tails'.");
+        }
+
+        Random random = threadLocalRandom.get();
+        boolean tossResultIsHeads = random.nextBoolean();
+        String tossResult = tossResultIsHeads ? "heads" : "tails";
+
+        String tossWinner = tossCall.equalsIgnoreCase(tossResult) ? tossCaller
+                : (tossCaller.equalsIgnoreCase(teamA.getName()) ? teamB.getName() : teamA.getName());
+
+        return new TossResponseDTO(tossWinner, tossResult, choice);
     }
-
-    Team teamA = teamAOpt.get();
-    Team teamB = teamBOpt.get();
-
-    if (!tossCaller.equalsIgnoreCase(teamA.getName()) && !tossCaller.equalsIgnoreCase(teamB.getName())) {
-        throw new RuntimeException("Invalid toss caller.");
-    }
-    if (!tossCall.equalsIgnoreCase("heads") && !tossCall.equalsIgnoreCase("tails")) {
-        throw new RuntimeException("Invalid toss call. Choose 'heads' or 'tails'.");
-    }
-
-    Random rand = new Random();
-    boolean tossResultIsHeads = rand.nextBoolean();
-    String tossResult = tossResultIsHeads ? "heads" : "tails";
-
-    String tossWinner = tossCall.equalsIgnoreCase(tossResult) ? tossCaller
-            : (tossCaller.equalsIgnoreCase(teamA.getName()) ? teamB.getName() : teamA.getName());
-
-    return new TossResponseDTO(tossWinner, tossResult, choice);
 }
-
-}
-
-
