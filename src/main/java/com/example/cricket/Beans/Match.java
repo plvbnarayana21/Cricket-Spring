@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Document(collection = "matches")
@@ -27,8 +29,11 @@ public class Match {
     private String tournamentId;
     private String location;
     private long tId;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+
 //    Pending,inProcess,completed
-    private String status;
+    private String status="PENDING";
     @DBRef(lazy = true)
     private List<Innings> inningsList;
 

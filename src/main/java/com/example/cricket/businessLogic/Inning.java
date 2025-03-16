@@ -164,7 +164,6 @@ import com.example.cricket.Beans.*;
 import com.example.cricket.dto.BallOutcome;
 import com.example.cricket.service.OverService;
 import com.example.cricket.service.ScoreCardService;
-import com.example.cricket.utility.ConsolePrinter;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;

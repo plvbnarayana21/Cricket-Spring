@@ -3,6 +3,7 @@ package com.example.cricket.service;
 import com.example.cricket.Beans.*;
 import com.example.cricket.dto.MatchResponseDTO;
 import com.example.cricket.repository.MatchRepo;
+import com.example.cricket.utility.TeamChecker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ public class MatchService {
     private final PlayerService playerService;
     private final MatchRepo matchRepo;
     private final TaskExecutor taskExecutor;
+    private final TeamChecker teamChecker;
 
     public ResponseEntity<String> startTwoMatches(String team1Name, String team2Name, String team3Name, String team4Name) {
         Team teamA = teamService.getByname(team1Name);
@@ -28,8 +30,9 @@ public class MatchService {
         playerService.updatePlayersMatchCount(teamC);
         playerService.updatePlayersMatchCount(teamD);
 
-        taskExecutor.execute(() -> matchRunnerService.runMatch(teamA, teamB));
 
+        taskExecutor.execute(() -> matchRunnerService.runMatch(teamA, teamB));
+        taskExecutor.execute(()->matchRunnerService.runMatch(teamA,teamC));
         taskExecutor.execute(() -> matchRunnerService.runMatch(teamC, teamD));
 
         return ResponseEntity.ok("Two matches started successfully and running in the background.");
