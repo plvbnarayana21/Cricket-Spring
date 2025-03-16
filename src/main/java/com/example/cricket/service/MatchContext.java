@@ -11,5 +11,6 @@ public class MatchContext {
     private final Match match;
     private final Team battingTeam;
     private final Team bowlingTeam;
+    private final long tid;
 
 }

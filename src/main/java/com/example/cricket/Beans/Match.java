@@ -26,6 +26,7 @@ public class Match {
     private String matchWinner;
     private String tournamentId;
     private String location;
+    private long tId;
 //    Pending,inProcess,completed
     private String status;
     @DBRef(lazy = true)

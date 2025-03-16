@@ -4,6 +4,7 @@ package com.example.cricket.service;
 import com.example.cricket.Beans.*;
 import com.example.cricket.dto.TossResult;
 import com.example.cricket.repository.MatchRepo;
+import com.example.cricket.utility.Threads;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,12 +24,13 @@ public class MatchRunnerService {
     private final InningsService inningsService;
     private final PlayerService playerService;
 
-    private final ExecutorService matchExecutor = Executors.newFixedThreadPool(2);
+    private final ExecutorService matchExecutor = Executors.newFixedThreadPool(3);
 
     public void runMatch(Team teamA, Team teamB) {
         matchExecutor.submit(() -> {
             try {
-                MatchContext context = createMatchContext(teamA, teamB);
+                long tId= Thread.currentThread().getId();
+                MatchContext context = createMatchContext(teamA, teamB,tId);
                 Innings firstInnings = inningsService.startInnings(
                         context.getMatch(),
                         context.getBattingTeam(),
@@ -51,7 +53,7 @@ public class MatchRunnerService {
         });
     }
 
-    private MatchContext createMatchContext(Team teamA, Team teamB) {
+    private MatchContext createMatchContext(Team teamA, Team teamB,long tId) {
         TossResult tossResult = tossService.conductToss(teamA, teamB);
         Team tossWinner = tossResult.getTossWinner();
         String choice = tossResult.getChoice();
@@ -65,13 +67,14 @@ public class MatchRunnerService {
         Match match = Match.builder()
                 .teamA(teamA)
                 .teamB(teamB)
+                .tId(tId)
                 .tossWinner(tossWinner.getName())
                 .tossChoice(choice)
                 .build();
 
         matchRepo.save(match);
 
-        return new MatchContext(match, battingTeam, bowlingTeam);
+        return new MatchContext(match, battingTeam, bowlingTeam,tId);
     }
 
     private void endMatch(Match match, Innings firstInnings, Innings secondInnings) {
@@ -91,18 +94,3 @@ public class MatchRunnerService {
         }
     }
 }
-//package com.example.cricket.service;
-//
-//import com.example.cricket.Beans.Match;
-//import com.example.cricket.Beans.Team;
-//import lombok.AllArgsConstructor;
-//import lombok.Data;
-//
-//@Data
-//@AllArgsConstructor
-//public class MatchContext {
-//    private final Match match;
-//    private final Team battingTeam;
-//    private final Team bowlingTeam;
-//
-//}
