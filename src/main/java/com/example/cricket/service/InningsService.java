@@ -21,7 +21,6 @@ public class InningsService {
 
     @Transactional
     public Innings startInnings(Match match, Team battingTeam, Team bowlingTeam, int inningsNo, int target) {
-        // Create and save the innings entity
         Innings innings = Innings.builder()
                 .battingTeam(battingTeam)
                 .bowlingTeam(bowlingTeam)
@@ -35,19 +34,15 @@ public class InningsService {
 
         innings = inningsRepository.save(innings);
 
-        // Initialize the Inning logic
         Inning inningLogic = applicationContext.getBean(Inning.class);
         inningLogic.init(battingTeam.getPlayers(), bowlingTeam.getPlayers(), innings, match, inningsNo);
 
-        // Simulate the innings
         int runs = inningLogic.startInnings(10, target);
 
-        // Update innings details
         innings.setTotalRuns(runs);
-        innings.setWicketsLost(inningLogic.getWicketsLost().get()); // Convert AtomicInteger to int
-        innings.setBallsPlayed(inningLogic.getBallsBowled().get()); // Convert AtomicInteger to int
+        innings.setWicketsLost(inningLogic.getWicketsLost().get());
+        innings.setBallsPlayed(inningLogic.getBallsBowled().get());
 
-        // Save and return the updated innings
         return inningsRepository.save(innings);
     }
 

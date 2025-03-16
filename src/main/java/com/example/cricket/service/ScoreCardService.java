@@ -17,7 +17,6 @@ public class ScoreCardService {
 
     @Transactional
     public synchronized void update(List<Player> batting, List<Player> bowling, int runs, int balls, int wickets, Innings innings, Match match, int iNo) {
-        // Create and save the ScoreCard entity
         ScoreCard sc = ScoreCard.builder()
                 .bowling(bowling)
                 .batting(batting)
@@ -34,11 +33,9 @@ public class ScoreCardService {
 
     @Transactional(readOnly = true)
     public ScoreCardDTO getthruId(String id) {
-        // Fetch the ScoreCard entity
         ScoreCard sc = scoreCardRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Scorecard not found"));
 
-        // Convert to DTO
         return new ScoreCardDTO(
                 sc.getId(),
                 sc.getBatting(),
