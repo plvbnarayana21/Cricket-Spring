@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -130,7 +129,6 @@ public class TournamentRepo implements TournamentRepository {
         return tournamentRepository.exists(example);
     }
 
-
     @Override
     public <S extends Tournament, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
         return tournamentRepository.findBy(example, queryFunction);
@@ -138,7 +136,12 @@ public class TournamentRepo implements TournamentRepository {
 
     @Override
     public Tournament findMatchesById(String id) {
-        return null;
+        Optional<Tournament> tournamentOptional = tournamentRepository.findById(id);
+        if (tournamentOptional.isPresent()) {
+            Tournament tournament = tournamentOptional.get();
+            return tournament;
+        } else {
+            return null; 
+        }
     }
-
 }

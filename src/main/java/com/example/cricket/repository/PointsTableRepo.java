@@ -52,7 +52,7 @@ public class PointsTableRepo implements PointsTableRepository {
 
     @Override
     public <S extends PointsTable> long count(Example<S> example) {
-        return pointsTableRepository.count();
+        return pointsTableRepository.count(example);
     }
 
     @Override
@@ -102,27 +102,27 @@ public class PointsTableRepo implements PointsTableRepository {
 
     @Override
     public void deleteById(String s) {
-
+        pointsTableRepository.deleteById(s);
     }
 
     @Override
     public void delete(PointsTable entity) {
-
+        pointsTableRepository.delete(entity);
     }
 
     @Override
     public void deleteAllById(Iterable<? extends String> strings) {
-
+        pointsTableRepository.deleteAllById(strings);
     }
 
     @Override
     public void deleteAll(Iterable<? extends PointsTable> entities) {
-
+        pointsTableRepository.deleteAll(entities);
     }
 
     @Override
     public void deleteAll() {
-
+        pointsTableRepository.deleteAll();
     }
 
     @Override
@@ -135,26 +135,8 @@ public class PointsTableRepo implements PointsTableRepository {
         return pointsTableRepository.findAll(pageable);
     }
 
-//    @Override
-//    public List<TeamPoints> findList() {
-//        return pointsTableRepository.findList();
-//    }
-
     @Override
     public PointsTable findByTournamentId(String tournamentId) {
-        return null;
+        return pointsTableRepository.findByTournamentId(tournamentId);
     }
-
-//    private final MongoTemplate mongoTemplate;
-//
-//    public void incrementPoints(String teamName, int pointsToAdd) {
-//        Query query = new Query(Criteria.where("teamName").is(teamName));
-//        Update update = new Update().inc("points", pointsToAdd);
-//        mongoTemplate.updateFirst(query, update, PointsTable.class);
-//    }
-//
-//    public PointsTable findByTeamName(String teamName) {
-//        Query query = new Query(Criteria.where("teamName").is(teamName));
-//        return mongoTemplate.findOne(query, PointsTable.class);
-//    }
 }

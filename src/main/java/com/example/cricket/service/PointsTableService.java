@@ -94,20 +94,4 @@ public class PointsTableService {
         System.out.println(topTeams);
         return topTeams;
     }
-//    public PointsTable getPointsTable(String tournamentId) {
-//        return pointsTableRepository.findByTournamentId(tournamentId);
-//    }
-//
-//    public TeamPoints getTeamPoints(String teamName, String tournamentId) {
-//        PointsTable pointsTable = pointsTableRepository.findByTournamentId(tournamentId);
-//        if (pointsTable == null) {
-//            throw new RuntimeException("Points table not found for tournament ID: " + tournamentId);
-//        }
-//
-//        return pointsTable.getTeamPoints().stream()
-//                .filter(tp -> tp.getTeamName().equalsIgnoreCase(teamName))
-//                .findFirst()
-//                .orElseThrow(() -> new RuntimeException("Team not found in points table: " + teamName));
-//    }
-
 }

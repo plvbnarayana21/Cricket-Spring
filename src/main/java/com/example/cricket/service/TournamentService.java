@@ -1,7 +1,6 @@
 
 package com.example.cricket.service;
 
-import com.example.cricket.Beans.PointsTable;
 import com.example.cricket.Beans.Tournament;
 import com.example.cricket.repository.TournamentRepo;
 import com.example.cricket.repository.TournamentRepository;
@@ -40,4 +39,5 @@ public class TournamentService {
     public void deleteTournaments(){
         tournamentRepo.deleteAll();
     }
+
 }
