@@ -36,7 +36,6 @@ public class TeamController {
 
     @GetMapping("/toss")
     public TossResult tossBetweenTeams(@RequestParam String team1Id, @RequestParam String team2Id) {
-        //all the logic should be in service layer
         Team team1 = teamService.getTeamById(team1Id);
         Team team2 = teamService.getTeamById(team2Id);
         return tossService.conductToss(team1, team2);

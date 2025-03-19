@@ -147,5 +147,10 @@ public class MatchRepo implements MatchRepository {
                 .filter(match -> "PENDING".equals(match.getStatus()))
                 .collect(Collectors.toList());
     }
-
+public Match findFinal(String tId) {
+    return matchRepository.findByTournamentId(tId).stream()
+            .filter(match -> "final".equalsIgnoreCase(match.getMatchType()))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("Final match not found for tournament ID: " + tId));
+}
 }

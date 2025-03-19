@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class ScoreCardService {
@@ -15,14 +16,16 @@ public class ScoreCardService {
     @Autowired
     private ScoreCardRepo scoreCardRepo;
 
-    @Transactional
+//    private final AtomicInteger totalRuns = new AtomicInteger(0);
     public synchronized void update(List<Player> batting, List<Player> bowling, int runs, int balls, int wickets, Innings innings, Match match, int iNo) {
+//        System.out.println("Adding Scorecards between"+match.getTeamA()+" and "+match.getTeamB());
+//        int truns=runs.intValue(),twickets=wickets.intValue(),tballs=balls.intValue();
         ScoreCard sc = ScoreCard.builder()
                 .bowling(bowling)
                 .batting(batting)
                 .totalRuns(runs)
-                .wickets(wickets)
-                .ballsplayed(balls)
+                .wickets(balls)
+                .ballsplayed(wickets)
                 .inning(innings.getId())
                 .match(match.getId())
                 .iNo(iNo)
@@ -31,7 +34,6 @@ public class ScoreCardService {
         scoreCardRepo.save(sc);
     }
 
-    @Transactional(readOnly = true)
     public ScoreCardDTO getthruId(String id) {
         ScoreCard sc = scoreCardRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Scorecard not found"));

@@ -2,13 +2,16 @@ package com.example.cricket.dto;
 
 import com.example.cricket.Beans.Player;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Data
 @AllArgsConstructor
+@Builder
 @NoArgsConstructor
 public class ScoreCardDTO {
     private String id;

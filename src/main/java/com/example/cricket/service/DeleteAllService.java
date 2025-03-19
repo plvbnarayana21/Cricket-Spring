@@ -13,6 +13,8 @@ public class DeleteAllService {
     private  final ScoreCardRepo scoreCardRepo;
     private final OverRepo overRepo;
     private final PlayerService playerService;
+    private  final TournamentService tournamentService;
+    private final PointsTableService pointsTableService;
 
     public String deleteAll(){
 
@@ -21,6 +23,8 @@ public class DeleteAllService {
         scoreCardRepo.deleteAll();
         overRepo.deleteAll();
         playerService.updateAllPlayers();
+        tournamentService.deleteTournaments();
+        pointsTableService.deleteTable();
         return "Data Updated to 0"  ;
 
     }

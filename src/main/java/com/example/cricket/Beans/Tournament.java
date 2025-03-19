@@ -5,26 +5,23 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
-@Document(collection = "ScoreCard")
-@Data
+@Document(collection = "Tournament")
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @Builder
-public class ScoreCard {
+public class Tournament {
     @Id
     private String id;
-    private List<Player> batting;
-    private List<Player> bowling;
-    private int totalRuns;
-    private int wickets;
-    private int ballsplayed;
-    private String inning;
-    private String match;
-    private int iNo;
+
+    private String tournamentWinner;
+    private String name;
+
+    private List<String> teams;
 
 }

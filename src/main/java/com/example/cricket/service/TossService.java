@@ -16,7 +16,6 @@ public class TossService {
     @Autowired
     private TeamRepo teamRepo;
 
-    // ThreadLocal Random to ensure thread safety
     private final ThreadLocal<Random> threadLocalRandom = ThreadLocal.withInitial(Random::new);
 
     public TossResult conductToss(Team teamA, Team teamB) {

@@ -31,8 +31,9 @@ public class Match {
     private long tId;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+    private String matchType;
+    private int highestScore;
 
-//    Pending,inProcess,completed
     private String status="PENDING";
     @DBRef(lazy = true)
     private List<Innings> inningsList;

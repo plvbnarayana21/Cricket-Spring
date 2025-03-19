@@ -31,9 +31,9 @@ public class MatchService {
         playerService.updatePlayersMatchCount(teamD);
 
 
-        taskExecutor.execute(() -> matchRunnerService.runMatch(teamA, teamB));
-        taskExecutor.execute(()->matchRunnerService.runMatch(teamA,teamC));
-        taskExecutor.execute(() -> matchRunnerService.runMatch(teamC, teamD));
+//        taskExecutor.execute(() -> matchRunnerService.runMatch(teamA, teamB));
+//        taskExecutor.execute(()->matchRunnerService.runMatch(teamA,teamC));
+//        taskExecutor.execute(() -> matchRunnerService.runMatch(teamC, teamD));
 
         return ResponseEntity.ok("Two matches started successfully and running in the background.");
     }
