@@ -9,7 +9,6 @@ import java.util.Random;
 @Component
 public class Probability {
 
-    // ThreadLocal Random to ensure thread safety
     private final ThreadLocal<Random> threadLocalRandom = ThreadLocal.withInitial(Random::new);
 
     public BallOutcome run(String type) {
