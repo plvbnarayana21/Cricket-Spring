@@ -38,9 +38,6 @@ public class Inning {
     private Player nonStriker;
     private int bowlerIndex = 10;
     private int overWickets = 0, overRuns = 0, overnumber = 1;
-//    private int totalRuns;
-//    private int wicketsLost;
-//    private int totalRuns;
 
     private Innings innings;
     private int iNo;
