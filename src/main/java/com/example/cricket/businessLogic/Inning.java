@@ -4,7 +4,7 @@ import com.example.cricket.Beans.*;
 import com.example.cricket.dto.BallOutcome;
 import com.example.cricket.service.OverService;
 import com.example.cricket.service.ScoreCardService;
-import lombok.Data;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -124,19 +124,15 @@ public class Inning {
             }
 
             strikeChange();
-//            System.out.println("Over Summary | Runs: " + overRuns + " | Wickets: " + overWickets);
             overService.updateOver(bowler.getPname(), overRuns, overWickets, overnumber++, iNo, innings, match);
 //            scoreCardService.update(battingTeam,bowlingTeam,totalRuns,ballsBowled,wicketsLost,innings,match,iNo);
             if (flag == 1) break;
             bowlerIndex = (bowlerIndex + 10) % bowlingTeam.size();
         }
-//        scoreCardService.update(battingTeam,bowlingTeam,totalRuns,ballsBowled,wicketsLost,innings,match,iNo);
 
 //        if (flag == 1)
 //            System.out.println("\nTarget achieved!!!!");
 
-//        System.out.println("\nInnings over! Score: " + totalRuns.get() + "/" + wicketsLost.get());
-//        System.out.println("Balls Played: " + ballsBowled.get());
 
         scoreCardPrint.update(battingTeam, bowlingTeam, totalRuns.get(), wicketsLost.get(), ballsBowled.get(),innings,match,iNo);
 //        scoreCardService.update(battingTeam, bowlingTeam, totalRuns.get(), ballsBowled.get(), wicketsLost.get(), innings, match, iNo);

@@ -4,7 +4,7 @@ import com.example.cricket.Beans.BallType;
 import com.example.cricket.Beans.Player;
 import com.example.cricket.dto.BallOutcome;
 import com.example.cricket.utility.Probability;
-import lombok.Data;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
